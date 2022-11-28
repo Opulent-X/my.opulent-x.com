@@ -11,8 +11,6 @@ const initialize = () => {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: '0xA21C' }],
       });
-      console.log("Connecting");
-      getAccountsResult.innerHTML = "Connected"
     } catch (switchError) {
       console.log({switchError})
       // This error code indicates that the chain has not been added to MetaMask.
@@ -37,13 +35,8 @@ const initialize = () => {
               },
             ],
           });
-
-          getAccountsResult.innerHTML = "Switched to Opulent-X BETA"
-       
         } catch (addError) {
          console.log(addError);
-         getAccountsResult.innerHTML = "An error occured while switching."
-
         }
       }
   

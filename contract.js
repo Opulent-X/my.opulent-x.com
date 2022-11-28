@@ -37,7 +37,8 @@ const initialize = () => {
   const onboardButton = document.getElementById('connectButton');
   const getAccountsButton = document.getElementById('getAccounts');
   const getAccountsResult = document.getElementById('getAccountsResult');
-  const switchChain = document.getElementById('switchChain');
+ 
+
 
   //Created check function to see if the MetaMask extension is installed
   const isMetaMaskInstalled = () => {
@@ -78,11 +79,7 @@ const initialize = () => {
       onboardButton.disabled = false;
     } else {
       //If MetaMask is installed we ask the user to connect to their wallet
-      onboardButton.innerText = 'Connect';
-      //When the button is clicked we call this function to connect the users MetaMask Wallet
-      onboardButton.onclick = onClickConnect;
-      //The button is now disabled
-      onboardButton.disabled = false;
+     
     }
   };
 
@@ -94,49 +91,51 @@ const initialize = () => {
     getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
   });
 
+  const switchChain = async () => {
+    console.log("switchChain");
+    try {
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0xA21C' }],
+      });
+    } catch (switchError) {
+      console.log({switchError})
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError.code === 4902 || switchError.code === -32603) {
+        try {
+          await ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainId: '0xA21C',
+                chainName: 'Opulent-X BETA',
+                rpcUrls: ['https://connect.opulent-x.com'] /* ... */,
+                nativeCurrency: {
+                  name: 'Oxymeum',
+                  symbol: 'OXYM', // 2-6 characters long
+                  decimals: 18
+                },
+                blockExplorerUrls:['https://explorer.opulent-x.com/'],
+                iconUrls:['https://raw.githubusercontent.com/Opulent-X/chain-meta/main/oxym-icon.png']
+               
+  
+              },
+            ],
+          });
+        } catch (addError) {
+         console.log(addError);
+        }
+      }
+  
+      console.log('switch error!');
+      // handle other "switch" errors
+    }
+  };
+
   MetaMaskClientCheck();
 };
 
-const switchChain = async () => {
-  console.log("switchChain");
-  try {
-    await ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0xA21C' }],
-    });
-  } catch (switchError) {
-    console.log({switchError})
-    // This error code indicates that the chain has not been added to MetaMask.
-    if (switchError.code === 4902 || switchError.code === -32603) {
-      try {
-        await ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [
-            {
-              chainId: '0xA21C',
-              chainName: 'Opulent-X BETA',
-              rpcUrls: ['https://connect.opulent-x.com'] /* ... */,
-              nativeCurrency: {
-                name: 'Oxymeum',
-                symbol: 'OXYM', // 2-6 characters long
-                decimals: 18
-              },
-              blockExplorerUrls:['https://explorer.opulent-x.com/'],
-              iconUrls:['https://raw.githubusercontent.com/Opulent-X/chain-meta/main/oxym-icon.png']
-             
 
-            },
-          ],
-        });
-      } catch (addError) {
-       console.log(addError);
-      }
-    }
-
-    console.log('switch error!');
-    // handle other "switch" errors
-  }
-};
 
 
 document.getElementById('switchChain').addEventListener('click',switchChain)

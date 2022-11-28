@@ -100,13 +100,11 @@ const initialize = () => {
 const switchChain = async () => {
   console.log("switchChain");
   try {
-    alert('wallet_switchEthereumChain')
     await ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: '0xA21C' }],
     });
   } catch (switchError) {
-    alert('switchError')
     console.log({switchError})
     // This error code indicates that the chain has not been added to MetaMask.
     if (switchError.code === 4902 || switchError.code === -32603) {

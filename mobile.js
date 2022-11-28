@@ -1,5 +1,5 @@
 
-const forwarderOrigin = 'http://localhost:9010';
+
 
 const initialize = () => {
   const getAccountsResult = document.getElementById('getAccountsResult');

@@ -79,7 +79,7 @@ const initialize = () => {
       onboardButton.disabled = false;
     } else {
       //If MetaMask is installed we ask the user to connect to their wallet
-     
+      switchChain();
     }
   };
 

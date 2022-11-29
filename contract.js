@@ -53,6 +53,7 @@ const initialize = () => {
   //This will start the onboarding proccess
   const onClickInstall = () => {
     onboardButton.innerText = 'Onboarding in progress';
+    getAccountsResult.innerHTML =  onboardButton.innerText;
     onboardButton.disabled = true;
     //On this object we have startOnboarding which will start the onboarding process for our end user
     onboarding.startOnboarding();
@@ -73,11 +74,13 @@ const initialize = () => {
     if (!isMetaMaskInstalled()) {
       //If it isn't installed we ask the user to click to install it
       onboardButton.innerText = 'Click here to install MetaMask!';
+      getAccountsResult.innerHTML = "Install Metamask"
       //When the button is clicked we call th is function
       onboardButton.onclick = onClickInstall;
       //The button is now disabled
       onboardButton.disabled = false;
     } else {
+      getAccountsResult.innerHTML = "Metamask Detected"
       //If MetaMask is installed we ask the user to connect to their wallet
       switchChain();
     }
@@ -92,6 +95,7 @@ const initialize = () => {
   });
 
   const switchChain = async () => {
+    
     console.log("switchChain");
     try {
       await ethereum.request({

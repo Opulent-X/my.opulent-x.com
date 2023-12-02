@@ -100,7 +100,7 @@ const initialize = () => {
     try {
       await ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0xA21C' }],
+        params: [{ chainId: '0x45A' }],
       });
     } catch (switchError) {
       console.log({switchError})
@@ -111,11 +111,11 @@ const initialize = () => {
             method: 'wallet_addEthereumChain',
             params: [
               {
-                chainId: '0xA21C',
+                chainId: '0x45A',
                 chainName: 'Opulent-X BETA',
                 rpcUrls: ['https://connect.opulent-x.com'] /* ... */,
                 nativeCurrency: {
-                  name: 'Oxymeum',
+                  name: 'Oxymeum Token',
                   symbol: 'OXYM', // 2-6 characters long
                   decimals: 18
                 },

@@ -1,5 +1,5 @@
 {
-  "name": "Opulent-X BETA Matamask Connect",
+  "name": "MetaMask_BETA_Connect",
   "version": "1.0.0",
   "description": "Allowing user to connect to OxBETA via web3 wallet, metamask",
   "scripts": {

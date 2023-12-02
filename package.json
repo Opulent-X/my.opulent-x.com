@@ -1,12 +1,12 @@
 {
-  "name": "metamask-simple-dapp",
+  "name": "metamask-BETA",
   "version": "1.0.0",
   "description": "Building a simple dapp used in MetaMask e2e tests.",
   "scripts": {
     "deploy": "./deploy.sh",
     "lint": "eslint . --ext js,json",
     "lint:fix": "eslint . --fix --ext js,json",
-    "serve": "static-server . --port 3030",
+    "serve": "static-server . --port 3035",
     "test": "yarn lint"
   },
   "repository": {
